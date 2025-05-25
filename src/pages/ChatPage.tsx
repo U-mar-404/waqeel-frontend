@@ -33,7 +33,16 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll on every new message
+  // Hide global footer on this page
+  useEffect(() => {
+    const siteFooter = document.querySelector('footer');
+    if (siteFooter) siteFooter.style.display = 'none';
+    return () => {
+      if (siteFooter) siteFooter.style.display = '';
+    };
+  }, []);
+
+  // Auto-scroll on new message
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -41,13 +50,11 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
   const handleSend = async () => {
     const content = input.trim();
     if (!content) return;
-    const userMsg: ChatMessage = {
-      id: Date.now().toString(),
-      text: content,
-      sender: 'user',
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, userMsg]);
+
+    setMessages((prev) => [
+      ...prev,
+      { id: Date.now().toString(), text: content, sender: 'user', timestamp: new Date() },
+    ]);
     setInput('');
     setIsTyping(true);
 
@@ -58,13 +65,15 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
         body: JSON.stringify({ query: content }),
       });
       const data = await res.json();
-      const aiMsg: ChatMessage = {
-        id: Date.now().toString() + '-ai',
-        text: data.answer || 'Sorry, I could not find an answer.',
-        sender: 'ai',
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, aiMsg]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString() + '-ai',
+          text: data.answer || 'Sorry, I could not find an answer.',
+          sender: 'ai',
+          timestamp: new Date(),
+        },
+      ]);
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -82,8 +91,8 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
-      {/* header */}
-      <header className="sticky top-0 z-10 flex items-center justify-between bg-white shadow px-4 sm:px-6 lg:px-8 py-3">
+      {/* HEADER */}
+      <header className="sticky top-0 z-10 flex items-center justify-between bg-white shadow px-4 py-3">
         <Link to="/" className="text-gray-500 hover:text-gray-700">
           <ArrowLeft size={24} />
         </Link>
@@ -93,8 +102,8 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
         <div className="w-6" />
       </header>
 
-      {/* scrollable messages */}
-      <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6 pb-24">
+      {/* MESSAGES */}
+      <main className="flex-1 overflow-y-auto px-4 py-6 pb-24">
         <div className="max-w-3xl mx-auto flex flex-col space-y-4">
           {messages.map((msg) => (
             <motion.div
@@ -136,8 +145,8 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
         </div>
       </main>
 
-      {/* fixed input box */}
-      <div className="fixed bottom-0 left-0 w-full bg-white px-4 sm:px-6 lg:px-8 py-4 border-t">
+      {/* FIXED INPUT (transparent bg + primary theme border) */}
+      <div className="fixed bottom-0 left-0 w-full bg-gray-50 px-4 py-4 border-t">
         <div className="max-w-3xl mx-auto flex items-center space-x-3">
           <input
             type="text"
@@ -145,7 +154,20 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Type your legal query..."
-            className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-600"
+            className="
+              flex-1
+              border
+              border-primary-600
+              rounded-full
+              px-4
+              py-2
+              bg-transparent
+              placeholder-primary-600
+              focus:outline-none
+              focus:ring-2
+              focus:ring-primary-600
+              focus:border-primary-600
+            "
           />
           <button
             onClick={handleSend}
