@@ -32,10 +32,10 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
   ]);
   const [isTyping, setIsTyping] = useState(false);
 
-  // Ref to the end of the messages list
+  // Ref to scroll into view
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom whenever messages change
+  // Auto‐scroll on every new message
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -43,7 +43,6 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
   const handleSend = async () => {
     const content = input.trim();
     if (!content) return;
-
     // add user message
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
@@ -51,7 +50,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
       sender: 'user',
       timestamp: new Date(),
     };
-    setMessages(prev => [...prev, userMsg]);
+    setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setIsTyping(true);
 
@@ -68,9 +67,9 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
         sender: 'ai',
         timestamp: new Date(),
       };
-      setMessages(prev => [...prev, aiMsg]);
+      setMessages((prev) => [...prev, aiMsg]);
     } catch {
-      setMessages(prev => [
+      setMessages((prev) => [
         ...prev,
         {
           id: Date.now().toString() + '-err',
@@ -85,22 +84,22 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
-      {/* sticky header */}
-      <header className="sticky top-0 z-10 flex items-center justify-between bg-white shadow px-4 sm:px-6 lg:px-8 py-3">
+    <div className="fixed bottom-5 right-5 w-full max-w-md h-[80vh] bg-gray-50 shadow-xl rounded-xl flex flex-col z-50">
+      {/* header */}
+      <header className="flex items-center justify-between bg-white px-4 py-3 border-b">
         <Link to="/" className="text-gray-500 hover:text-gray-700">
           <ArrowLeft size={24} />
         </Link>
         <h2 className="text-lg font-semibold text-primary-600">
           {lawyerType === 'civil' ? 'Civil Law Chat' : 'Criminal Law Chat'}
         </h2>
-        <div className="w-6" /> {/* placeholder for centering */}
+        <div className="w-6" />
       </header>
 
-      {/* scrollable messages */}
-      <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="max-w-3xl mx-auto flex flex-col space-y-4">
-          {messages.map(msg => (
+      {/* messages */}
+      <main className="flex-1 overflow-y-auto px-4 py-6 pb-24">
+        <div className="flex flex-col space-y-4">
+          {messages.map((msg) => (
             <motion.div
               key={msg.id}
               initial={{ opacity: 0, y: 10 }}
@@ -145,19 +144,18 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
             </div>
           )}
 
-          {/* Dummy div to scroll into view */}
           <div ref={messagesEndRef} />
         </div>
       </main>
 
-      {/* sticky input box */}
-      <footer className="sticky bottom-0 z-10 bg-white px-4 sm:px-6 lg:px-8 py-4 border-t">
-        <div className="max-w-3xl mx-auto flex items-center space-x-3">
+      {/* floating input box */}
+      <div className="absolute bottom-0 left-0 w-full bg-white px-4 py-3 border-t">
+        <div className="flex items-center space-x-3">
           <input
             type="text"
             value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handleSend()}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Type your legal query..."
             className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-600"
           />
@@ -168,7 +166,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
             <Send size={20} />
           </button>
         </div>
-      </footer>
+      </div>
     </div>
   );
 };
