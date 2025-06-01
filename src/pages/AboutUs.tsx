@@ -1,7 +1,11 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import creator1 from '../assets/creator1.jpg';
-import creator2 from '../assets/creator2.jpg';
+// src/pages/AboutUs.tsx
+
+import React from "react";
+import { motion } from "framer-motion";
+import creator1 from "../assets/creator1.jpg";
+import creator2 from "../assets/creator2.jpg";
+import creator3 from "../assets/creator3.jpg";
+import creator4 from "../assets/creator4.jpg";
 
 const AboutUs: React.FC = () => {
   return (
@@ -16,7 +20,7 @@ const AboutUs: React.FC = () => {
         About ApnaWaqeel
       </h1>
 
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-12">
+      <div className="flex flex-wrap items-center justify-center gap-8 mb-12">
         <img
           src={creator1}
           alt="Founder 1"
@@ -25,6 +29,16 @@ const AboutUs: React.FC = () => {
         <img
           src={creator2}
           alt="Founder 2"
+          className="w-48 h-48 rounded-full shadow-lg object-cover"
+        />
+        <img
+          src={creator3}
+          alt="Founder 3"
+          className="w-48 h-48 rounded-full shadow-lg object-cover"
+        />
+        <img
+          src={creator4}
+          alt="Founder 4"
           className="w-48 h-48 rounded-full shadow-lg object-cover"
         />
       </div>

@@ -1,23 +1,28 @@
-import { Link, useLocation } from 'react-router-dom';
-import { Scale, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+// src/components/Navbar.tsx
 
-const Navbar = () => {
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Scale, Menu, X } from "lucide-react";
+
+const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
+
+  useEffect(() => {
+    // Close mobile menu when the route changes
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <nav className="bg-white shadow-md">
       <div className="container-custom py-4">
         <div className="flex items-center justify-between">
-
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <Scale size={28} className="text-primary-500" />
-            <span className="text-xl font-bold text-primary-600">
-              ApnaWaqeel
-            </span>
+            <span className="text-xl font-bold text-primary-600">ApnaWaqeel</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -25,9 +30,7 @@ const Navbar = () => {
             <Link
               to="/"
               className={`text-sm font-medium ${
-                location.pathname === '/'
-                  ? 'text-primary-500'
-                  : 'text-gray-600 hover:text-primary-500'
+                location.pathname === "/" ? "text-primary-500" : "text-gray-600 hover:text-primary-500"
               }`}
             >
               Home
@@ -36,9 +39,7 @@ const Navbar = () => {
             <Link
               to="/select"
               className={`text-sm font-medium ${
-                location.pathname === '/select'
-                  ? 'text-primary-500'
-                  : 'text-gray-600 hover:text-primary-500'
+                location.pathname === "/select" ? "text-primary-500" : "text-gray-600 hover:text-primary-500"
               }`}
             >
               Get Started
@@ -47,9 +48,7 @@ const Navbar = () => {
             <Link
               to="/about-us"
               className={`text-sm font-medium ${
-                location.pathname === '/about-us'
-                  ? 'text-primary-500'
-                  : 'text-gray-600 hover:text-primary-500'
+                location.pathname === "/about-us" ? "text-primary-500" : "text-gray-600 hover:text-primary-500"
               }`}
             >
               About Us
@@ -58,20 +57,26 @@ const Navbar = () => {
             <Link
               to="/terms"
               className={`text-sm font-medium ${
-                location.pathname === '/terms'
-                  ? 'text-primary-500'
-                  : 'text-gray-600 hover:text-primary-500'
+                location.pathname === "/terms" ? "text-primary-500" : "text-gray-600 hover:text-primary-500"
               }`}
             >
               Terms of Service
             </Link>
 
+            {/* Predict link before Contact Us */}
+            <Link
+              to="/predict"
+              className={`text-sm font-medium ${
+                location.pathname === "/predict" ? "text-primary-500" : "text-gray-600 hover:text-primary-500"
+              }`}
+            >
+              Predict
+            </Link>
+
             <Link
               to="/contact-us"
               className={`text-sm font-medium btn-outline py-2 ${
-                location.pathname === '/contact-us'
-                  ? 'text-primary-500'
-                  : 'text-gray-600 hover:text-primary-500'
+                location.pathname === "/contact-us" ? "text-primary-500" : "text-gray-600 hover:text-primary-500"
               }`}
             >
               Contact Us
@@ -93,9 +98,8 @@ const Navbar = () => {
             <div className="flex flex-col space-y-4">
               <Link
                 to="/"
-                onClick={() => setIsMenuOpen(false)}
                 className={`text-base font-medium ${
-                  location.pathname === '/' ? 'text-primary-500' : 'text-gray-600'
+                  location.pathname === "/" ? "text-primary-500" : "text-gray-600"
                 }`}
               >
                 Home
@@ -103,9 +107,8 @@ const Navbar = () => {
 
               <Link
                 to="/select"
-                onClick={() => setIsMenuOpen(false)}
                 className={`text-base font-medium ${
-                  location.pathname === '/select' ? 'text-primary-500' : 'text-gray-600'
+                  location.pathname === "/select" ? "text-primary-500" : "text-gray-600"
                 }`}
               >
                 Get Started
@@ -113,9 +116,8 @@ const Navbar = () => {
 
               <Link
                 to="/about-us"
-                onClick={() => setIsMenuOpen(false)}
                 className={`text-base font-medium ${
-                  location.pathname === '/about-us' ? 'text-primary-500' : 'text-gray-600'
+                  location.pathname === "/about-us" ? "text-primary-500" : "text-gray-600"
                 }`}
               >
                 About Us
@@ -123,19 +125,27 @@ const Navbar = () => {
 
               <Link
                 to="/terms"
-                onClick={() => setIsMenuOpen(false)}
                 className={`text-base font-medium ${
-                  location.pathname === '/terms' ? 'text-primary-500' : 'text-gray-600'
+                  location.pathname === "/terms" ? "text-primary-500" : "text-gray-600"
                 }`}
               >
                 Terms of Service
               </Link>
 
+              {/* Predict link before Contact Us */}
+              <Link
+                to="/predict"
+                className={`text-base font-medium ${
+                  location.pathname === "/predict" ? "text-primary-500" : "text-gray-600"
+                }`}
+              >
+                Predict
+              </Link>
+
               <Link
                 to="/contact-us"
-                onClick={() => setIsMenuOpen(false)}
                 className={`text-base font-medium ${
-                  location.pathname === '/contact-us' ? 'text-primary-500' : 'text-gray-600'
+                  location.pathname === "/contact-us" ? "text-primary-500" : "text-gray-600"
                 }`}
               >
                 Contact Us

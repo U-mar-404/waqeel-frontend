@@ -1,8 +1,8 @@
 // src/pages/ContactUs.tsx
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Scale, Mail, Phone, MapPin, Clock } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { Scale, Mail, Phone, MapPin, Clock } from "lucide-react";
 
 const ContactUs: React.FC = () => (
   <motion.div
@@ -13,7 +13,6 @@ const ContactUs: React.FC = () => (
     transition={{ duration: 0.5 }}
   >
     <div className="container-custom max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-8">
-      
       {/* Header */}
       <div className="flex items-center justify-center mb-8 space-x-2">
         <Scale size={28} className="text-primary-600" />
@@ -43,7 +42,6 @@ const ContactUs: React.FC = () => (
           Our Team
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
           {/* Developer 1 */}
           <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
             <h3 className="text-xl font-bold mb-1">Muhammad Umar</h3>
@@ -51,7 +49,10 @@ const ContactUs: React.FC = () => (
             <ul className="space-y-2 text-gray-700">
               <li className="flex items-center space-x-2">
                 <Mail size={18} className="text-accent-500" />
-                <a href="mailto:umarabdullahumar@gmail.com" className="hover:underline">
+                <a
+                  href="mailto:umarabdullahumar@gmail.com"
+                  className="hover:underline"
+                >
                   umarabdullahumar@gmail.com
                 </a>
               </li>
@@ -71,7 +72,10 @@ const ContactUs: React.FC = () => (
             <ul className="space-y-2 text-gray-700">
               <li className="flex items-center space-x-2">
                 <Mail size={18} className="text-accent-500" />
-                <a href="mailto:Moeezzafar0000@gmail.com" className="hover:underline">
+                <a
+                  href="mailto:Moeezzafar0000@gmail.com"
+                  className="hover:underline"
+                >
                   Moeezzafar0000@gmail.com
                 </a>
               </li>
@@ -84,6 +88,51 @@ const ContactUs: React.FC = () => (
             </ul>
           </div>
 
+          {/* Developer 3 */}
+          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+            <h3 className="text-xl font-bold mb-1">Muhammad Hashir Khan</h3>
+            <p className="text-gray-600 mb-4">AI Engineer</p>
+            <ul className="space-y-2 text-gray-700">
+              <li className="flex items-center space-x-2">
+                <Mail size={18} className="text-accent-500" />
+                <a
+                  href="mailto:mhashirkhan447@gmail.com"
+                  className="hover:underline"
+                >
+                  mhashirkhan447@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center space-x-2">
+                <Phone size={18} className="text-accent-500" />
+                <a href="tel:+923300358556" className="hover:underline">
+                  +92 330 0358556
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Developer 4 */}
+          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+            <h3 className="text-xl font-bold mb-1">Abdul Moiz Ali</h3>
+            <p className="text-gray-600 mb-4">AI Engineer</p>
+            <ul className="space-y-2 text-gray-700">
+              <li className="flex items-center space-x-2">
+                <Mail size={18} className="text-accent-500" />
+                <a
+                  href="mailto:231239@students.au.edu.pk"
+                  className="hover:underline"
+                >
+                  231239@students.au.edu.pk
+                </a>
+              </li>
+              <li className="flex items-center space-x-2">
+                <Phone size={18} className="text-accent-500" />
+                <a href="tel:+923405196393" className="hover:underline">
+                  +92 340 5196393
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
     </div>
