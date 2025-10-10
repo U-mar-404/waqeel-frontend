@@ -59,7 +59,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ lawyerType }) => {
     setIsTyping(true);
 
     try {
-      const res = await fetch('https://web-production-bceb.up.railway.app/query', {
+      const res = await fetch('https://waqeel-backend-1.onrender.com/query', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: content }),
