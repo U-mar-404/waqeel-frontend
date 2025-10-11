@@ -90,22 +90,22 @@ const ContactUs: React.FC = () => (
 
           {/* Developer 3 */}
           <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-            <h3 className="text-xl font-bold mb-1">Muhammad Hashir Khan</h3>
+            <h3 className="text-xl font-bold mb-1">Haris Khalid</h3>
             <p className="text-gray-600 mb-4">AI Engineer</p>
             <ul className="space-y-2 text-gray-700">
               <li className="flex items-center space-x-2">
                 <Mail size={18} className="text-accent-500" />
                 <a
-                  href="mailto:mhashirkhan447@gmail.com"
+                  href="mailto:harry_1110@icloud.com"
                   className="hover:underline"
                 >
-                  mhashirkhan447@gmail.com
+                  harry_1110@icloud.com
                 </a>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone size={18} className="text-accent-500" />
-                <a href="tel:+923300358556" className="hover:underline">
-                  +92 330 0358556
+                <a href="tel:+923459999977" className="hover:underline">
+                  +92 345 9999977
                 </a>
               </li>
             </ul>
